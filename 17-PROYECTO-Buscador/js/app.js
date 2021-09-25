@@ -88,7 +88,7 @@ color.addEventListener('change', (e) => {
 })
 
 function mostrarAutos(autos) {
-    limpirHTML(); //elimina el html previo
+    limpiarHTML(); //elimina el html previo
 
     autos.forEach(auto => {
         const { marca, modelo, year, puertas, transmision, precio, color } = auto;
@@ -104,7 +104,7 @@ function mostrarAutos(autos) {
 
 //LIMPIAR HTML
 
-function limpirHTML() {
+function limpiarHTML() {
     while(resultado.firstChild) {
         resultado.removeChild(resultado.firstChild);
     }
@@ -131,8 +131,26 @@ function filtrarAuto() {
                                                                         .filter( filtrarColor );
     //console.log(resultado);
 
-    mostrarAutos(resultado);
+    if ( resultado.length ) {
+        mostrarAutos(resultado);
+    } else {
+        noResultado();
+    }
+}
 
+function noResultado() {
+
+    limpiarHTML();
+
+    //crea un div
+    const noResultado = document.createElement('div');
+    //le agrega 2 clases al div recien creado
+    noResultado.classList.add('alerta', 'error');
+    //le agrega texto al div
+    noResultado.textContent = 'No hay Resultados, intenta con otra busqueda';    
+
+    //agrega el div al html
+    resultado.appendChild(noResultado);
 }
 
 function filtrarMarca(auto) {
@@ -187,7 +205,7 @@ function filtrarTransmision(auto) {
 function filtrarColor(auto) {
     const { color }  = datosBusqueda;
     if( color ) {
-        return auto.color = color;
+        return auto.color === color;
     }
     return auto;    
 }
