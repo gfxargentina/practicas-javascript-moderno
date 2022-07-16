@@ -10,7 +10,7 @@ const aplicarDescuento = new Promise((resolve, reject) => {
 
 //console.log(aplicarDescuento);
 
-//sintaxis para acceder al promise aplicarDescuento
+//para controlar la promesa usamos el método then y catch que vienen junto con las promesas
 aplicarDescuento
   .then((resultado) => console.log(resultado)) //es el resultado del resolve
   .catch((error) => console.log(error)); //es el resultado del rejected
